@@ -5,9 +5,9 @@ export const Theme = (): JSX.Element => {
 
     const dispatch = useDispatch();
     const usingDarkMode = useSelector(themeStateSelector);
-    let icon: string = "🌞";
+    let icon: string = "🌙";
     if (!usingDarkMode) {
-        icon = '🌙';
+        icon = "🌞";
     }
 
     const onClickHandler = (): void => {
