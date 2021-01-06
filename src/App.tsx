@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Home } from './home/index';
 
-function App() {
+export const App = (): JSX.Element => {
+
+  useEffect(() => {
+    
+  });
+
   return (
     <BrowserRouter>
       <Switch>
@@ -11,6 +17,4 @@ function App() {
       </Switch>
     </BrowserRouter>
   );
-}
-
-export default App;
+};
