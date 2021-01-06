@@ -9,6 +9,7 @@ import {
     Theme
 } from "../components/components";
 import { themeStateSelector } from "../store/themeSlice";
+import { Proficiency } from "./proficiency";
 
 export const Home = (): JSX.Element => {
 
@@ -38,19 +39,8 @@ export const Home = (): JSX.Element => {
                             <Briefcase/>
                             Software Developer
                         </p>
-                        <p className="pt-8 text-sm">Currently working with Dart and Flutter</p>
-                        <p className="pt-8 text-sm">Blog</p>
-                        <div className="mt-6 pb-16 lg:pb-0 w-4/5 lg:w-full mx-auto flex flex-wrap items-center justify-between">
-                            <Link link="https://github.com/pigilwin">
-                                <GitHub/>
-                            </Link>
-                            <Link link="https://www.instagram.com/timremnant">
-                                <Instagram/>
-                            </Link>
-                            <Link link="https://www.linkedin.com/in/tim-remnant-420094106/">
-                                <LinkedIn/>
-                            </Link>
-                        </div>
+                        <Proficiency/>
+                        <Links/>
                     </div>
                 </div>
                 <Theme/>
@@ -59,13 +49,30 @@ export const Home = (): JSX.Element => {
     );
 }
 
-interface LinkProps {
-    link: string;
-}
-const Link = ({link, children}: PropsWithChildren<LinkProps>): JSX.Element => {
+const Links = (): JSX.Element => {
+
+    interface LinkProps {
+        link: string;
+    }
+    const Link = ({link, children}: PropsWithChildren<LinkProps>): JSX.Element => {
+        return (
+            <a href={link} rel="noreferrer" target="_blank" className="link">
+                {children}
+            </a>
+        );
+    }    
+
     return (
-        <a href={link} rel="noreferrer" target="_blank" className="link">
-            {children}
-        </a>
+        <div className="mt-6 pb-16 lg:pb-0 w-4/5 lg:w-full mx-auto flex flex-wrap items-center justify-between">
+            <Link link="https://github.com/pigilwin">
+                <GitHub/>
+            </Link>
+            <Link link="https://www.instagram.com/timremnant">
+                <Instagram/>
+            </Link>
+            <Link link="https://www.linkedin.com/in/tim-remnant-420094106/">
+                <LinkedIn/>
+            </Link>
+        </div>
     );
 }
