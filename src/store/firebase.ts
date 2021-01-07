@@ -12,9 +12,6 @@ firebase.initializeApp({
     appId: "1:40386379634:web:872f2c486fdfaea0d267eb"
 });
 
-export const signInWithEmailLink = async (email: string): Promise<void> => {
-    await firebase.auth().sendSignInLinkToEmail(email, {
-        handleCodeInApp: true,
-        url: 'https://www.pigilwin.com',
-    });
+export const signInWithEmailLink = async (email: string, password: string): Promise<firebase.auth.UserCredential> => {
+    return await firebase.auth().signInWithEmailAndPassword(email, password);
 };
