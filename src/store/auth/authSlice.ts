@@ -3,16 +3,23 @@ import { RootState } from '../rootReducer';
 
 interface AuthState {
     authId: string;
+    attemptingAuth: boolean;
 }
 
 const initialState: AuthState = {
-    authId: ''
+    authId: '',
+    attemptingAuth: false
 }
 
 const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+        setIsCurrentlyAttemptingAuth(state, action: PayloadAction<boolean>) {
+            const newState = state;
+            newState.attemptingAuth = action.payload;
+            return newState;
+        },
         setAuthId(state, action: PayloadAction<string>) {
             const newState = state;
             state.authId = action.payload;
@@ -23,6 +30,9 @@ const authSlice = createSlice({
 
 export const reducer = authSlice.reducer;
 export const {
-    setAuthId
+    setAuthId,
+    setIsCurrentlyAttemptingAuth
 } = authSlice.actions;
-export const isAuthenticated = (state: RootState) => state.authReducer.authId.length > 0;
+
+export const isAuthenticatedSelector = (state: RootState): boolean => state.authReducer.authId.length > 0;
+export const isAttemptingAuthSelector = (state: RootState): boolean => state.authReducer.attemptingAuth;

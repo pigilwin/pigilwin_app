@@ -1,58 +1,37 @@
 import { PropsWithChildren } from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { 
     Photo,
     Briefcase, 
     GitHub,
     Instagram,
-    LinkedIn,
-    Theme
+    LinkedIn
 } from "../components/components";
-import { themeStateSelector } from "../store/theme/themeSlice";
 import { Proficiency } from "./proficiency";
 
 export const Home = (): JSX.Element => {
-
-    const usingDarkMode = useSelector(themeStateSelector);
-    const classNames: string[] = [
-        "font-sans",
-        "antialiased",
-        "leading-normal",
-        "tracking-wider"
-    ];
-
-    if (usingDarkMode) {
-        classNames.push("bg-gray-900");
-    } else {
-        classNames.push("bg-white");
-    }
-
     return (
-        <main className={classNames.join(" ")}>
-            <div className="max-w-4xl flex items-center h-auto flex-wrap mx-auto">
-                <Photo/>
-                <div id="profile" className="w-full rounded-lg shadow-2xl bg-white opacity-75 my-4">
-                    <div className="p-4 md:p-12 text-center lg:text-left">
-                        <h1 className="text-3xl font-bold pt-8 lg:pt-0">Tim Remnant</h1>
-                        <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-teal-500 opacity-25"></div>
-                        <p className="pt-4 text-base font-bold flex items-center justify-center lg:justify-start">
-                            <Briefcase/>
-                            Software Developer
-                        </p>
-                        <Link to="/blog">
-                            <p className="pt-4 text-base font-bold">Blog</p>
-                        </Link>
-                        <Links/>
-                    </div>
+        <div className="max-w-4xl flex items-center h-auto flex-wrap mx-auto">
+            <Photo/>
+            <div id="profile" className="w-full rounded-lg shadow-2xl bg-white opacity-75 my-4">
+                <div className="p-4 md:p-12 text-center lg:text-left">
+                    <h1 className="text-3xl font-bold pt-8 lg:pt-0">Tim Remnant</h1>
+                    <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-teal-500 opacity-25"></div>
+                    <p className="pt-4 text-base font-bold flex items-center justify-center lg:justify-start">
+                        <Briefcase/>
+                        Software Developer
+                    </p>
+                    <Link to="/blog">
+                        <p className="pt-4 text-base font-bold">Blog</p>
+                    </Link>
+                    <Links/>
                 </div>
-                <div className="w-full rounded-lg shadow-2xl bg-white opacity-75 my-4">
-                    <h1 className="text-center p-4 text-2xl">Technologies</h1>
-                    <Proficiency/>
-                </div>
-                <Theme/>
             </div>
-        </main>
+            <div className="w-full rounded-lg shadow-2xl bg-white opacity-75 my-4">
+                <h1 className="text-center p-4 text-2xl">Technologies</h1>
+                <Proficiency/>
+            </div>
+        </div>
     );
 }
 
