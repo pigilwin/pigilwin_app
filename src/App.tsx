@@ -16,16 +16,20 @@ export const App = (): JSX.Element => {
   }, [dispatch]);
 
   const usingDarkMode = useSelector(themeStateSelector);
-    const classNames: string[] = [
-        "font-sans",
-        "antialiased",
-        "leading-normal",
-        "tracking-wider"
-    ];
+  const rootElement = window.document.documentElement;
+  const classNames: string[] = [
+      "font-sans",
+      "antialiased",
+      "leading-normal",
+      "tracking-wider",
+      "dark:bg-gray-700"
+  ];
 
-    if (usingDarkMode) {
-        classNames.push("dark");
-    }
+  if (usingDarkMode) {
+      rootElement.classList.add("dark");
+  } else {
+    rootElement.classList.remove("dark");
+  }
 
   return (
     <main className={classNames.join(" ")}>
