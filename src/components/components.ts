@@ -1,12 +1,14 @@
 export { Photo } from './photo';
 export { 
     Instagram, 
-    LinkedIn, 
+    LinkedIn,
     GitHub, 
     Briefcase,
     React,
     Flutter,
     Dart,
-    TypeScript
+    TypeScript,
+    Laravel,
+    JavaScript
 } from './icons';
 export { Theme } from './theme';

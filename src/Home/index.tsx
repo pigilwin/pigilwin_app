@@ -29,9 +29,9 @@ export const Home = (): JSX.Element => {
 
     return (
         <main className={classNames.join(" ")}>
-            <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto">
+            <div className="max-w-4xl flex items-center h-auto flex-wrap mx-auto">
                 <Photo/>
-                <div id="profile" className="w-full rounded-lg shadow-2xl bg-white opacity-75">
+                <div id="profile" className="w-full rounded-lg shadow-2xl bg-white opacity-75 my-4">
                     <div className="p-4 md:p-12 text-center lg:text-left">
                         <h1 className="text-3xl font-bold pt-8 lg:pt-0">Tim Remnant</h1>
                         <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-teal-500 opacity-25"></div>
@@ -39,9 +39,12 @@ export const Home = (): JSX.Element => {
                             <Briefcase/>
                             Software Developer
                         </p>
-                        <Proficiency/>
                         <Links/>
                     </div>
+                </div>
+                <div className="w-full rounded-lg shadow-2xl bg-white opacity-75 my-4">
+                    <h1 className="text-center p-4 text-2xl">Technologies</h1>
+                    <Proficiency/>
                 </div>
                 <Theme/>
             </div>
