@@ -7,6 +7,7 @@ import { areWeAddingANewBlogSelector } from "../store/blog/blogSlice";
 import { SignInLink, CreateNewLink } from './links';
 import { SignInPage } from './signIn';
 import { Editor } from './Editor';
+import { Blog as BlogType } from "../store/blog/blogTypes";
 
 export const Blog = (): JSX.Element => {
 
@@ -19,7 +20,13 @@ export const Blog = (): JSX.Element => {
     }
 
     if (areWeAddingANewBlog) {
-        return <Editor title="" content=""/>
+        const emptyBlogWithId: BlogType = {
+            id: '',
+            title: '',
+            content: '',
+            date: ''
+        };
+        return <Editor blog={emptyBlogWithId}/>
     }
 
     let element: JSX.Element = <SignInLink/>;

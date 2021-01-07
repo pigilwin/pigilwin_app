@@ -36,7 +36,7 @@ export const CreateNewLink = (): JSX.Element => {
     }
     
     return (
-        <div className="p-4">
+        <div className="w-full grid grid-cols-2 gap-4">
             <Button
                 onClick={createNewHandler}
                 title="Create New"

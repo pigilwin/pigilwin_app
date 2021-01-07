@@ -3,13 +3,17 @@ import ReactMde, { Classes } from "react-mde";
 import * as Showdown from "showdown";
 import "react-mde/lib/styles/css/react-mde-all.css";
 import { Button, TextInput } from "../components/input";
+import { useDispatch } from "react-redux";
+import { Blog } from "../store/blog/blogTypes";
+import { createPostAsync } from '../store/blog/blogEvent';
 
 interface EditorProps {
-    title: string;
-    content: string;
+    blog: Blog;
 }
-export const Editor = ({title, content}: EditorProps): JSX.Element => {
+export const Editor = ({blog}: EditorProps): JSX.Element => {
     
+    const dispatch = useDispatch();
+
     const converter = new Showdown.Converter({
         tables: true,
         simplifiedAutoLink: true,
@@ -17,8 +21,8 @@ export const Editor = ({title, content}: EditorProps): JSX.Element => {
         tasklists: true
     });
 
-    const [contentTitle, setContentTitle] = useState(title);
-    const [value, setValue] = useState(content);
+    const [contentTitle, setContentTitle] = useState(blog.title);
+    const [value, setValue] = useState(blog.content);
     
     const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
 
@@ -37,7 +41,13 @@ export const Editor = ({title, content}: EditorProps): JSX.Element => {
     }
 
     const saveClickHandler = (): void => {
-        
+
+        blog.title = contentTitle;
+        blog.content = value;
+
+        if (blog.id.length === 0) {
+            dispatch(createPostAsync(blog.title, blog.content));
+        }
     }
 
     const deleteClickHandler = (): void => {

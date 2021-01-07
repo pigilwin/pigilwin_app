@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../rootReducer";
+import { Blog } from "./blogTypes";
 
 interface BlogState {
-    blogs: string[];
+    blogs: Blog[];
     addingNewBlog: boolean;
 }
 
@@ -15,9 +16,14 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setBlogs(state, action: PayloadAction<string[]>) {
+        setBlogs(state, action: PayloadAction<Blog[]>) {
             const newState = state;
             newState.blogs = action.payload;
+            return newState;
+        },
+        addBlog(state, action: PayloadAction<Blog>) {
+            const newState = state;
+            newState.blogs.push(action.payload);
             return newState;
         },
         addingNewBlog(state, action: PayloadAction<boolean>) {
@@ -31,6 +37,7 @@ const authSlice = createSlice({
 export const reducer = authSlice.reducer;
 export const {
     setBlogs,
+    addBlog,
     addingNewBlog
 } = authSlice.actions;
 
