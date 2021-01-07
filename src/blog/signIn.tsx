@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Button, PasswordInput, TextInput } from "../components/input";
 import { setAuthId, setIsCurrentlyAttemptingAuth } from "../store/auth/authSlice";
 import { authenticateIn } from "../store/firebase";
 
@@ -49,32 +50,26 @@ export const SignInPage = (): JSX.Element => {
                         Login
                     </h2>
                     <div className="mt-10">
-                        <label htmlFor="email" className="block text-xs font-semibold text-gray-600 uppercase">E-mail</label>
-                        <input id="email" type="email" name="email" onChange={onChangeEmailHandler} placeholder="e-mail address" autoComplete="email"
-                            className="block w-full py-3 px-1 mt-2 
-                            text-gray-800 appearance-none 
-                            border-b-2 border-gray-100
-                            focus:text-gray-500 focus:outline-none focus:border-gray-200"
-                            required />
+                        <label className="block text-xs font-semibold text-gray-600 uppercase">E-mail</label>
+                        <TextInput
+                            onChangeHandler={onChangeEmailHandler}
+                            placeholder="E-mail"
+                            value={email}
+                        />
                         <label htmlFor="password" className="block mt-2 text-xs font-semibold text-gray-600 uppercase">Password</label>
-                        <input id="password" type="password" name="password" onChange={onChangePasswordHandler} placeholder="password" autoComplete="current-password"
-                            className="block w-full py-3 px-1 mt-2 mb-4
-                            text-gray-800 appearance-none 
-                            border-b-2 border-gray-100
-                            focus:text-gray-500 focus:outline-none focus:border-gray-200"
-                            required />
-                        <button onClick={signInClickHandler}
-                            className="w-full py-3 mt-10 bg-gray-800 rounded-sm
-                            font-medium text-white uppercase
-                            focus:outline-none hover:bg-gray-700 hover:shadow-none">
-                            Login
-                        </button>
-                        <button onClick={goBackClickHandler}
-                            className="w-full py-3 mt-10 bg-gray-800 rounded-sm
-                            font-medium text-white uppercase
-                            focus:outline-none hover:bg-gray-700 hover:shadow-none">
-                            Go Back
-                        </button>
+                        <PasswordInput
+                            onChangeHandler={onChangePasswordHandler}
+                            placeholder="******"
+                            value={password}
+                        />
+                        <Button
+                            onClick={signInClickHandler}
+                            title="Login"
+                        />
+                        <Button
+                            onClick={goBackClickHandler}
+                            title="Go Back"
+                        />
                     </div>
                 </div>
             </div>

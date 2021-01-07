@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { Button } from "../components/input";
 import { setAuthId, setIsCurrentlyAttemptingAuth } from "../store/auth/authSlice";
 import { addingNewBlog } from "../store/blog/blogSlice";
 import { authenticateOut } from "../store/firebase";
@@ -12,9 +13,12 @@ export const SignInLink = (): JSX.Element => {
     };
 
     return (
-        <button onClick={onClickHandler} className="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-700 uppercase transition bg-transparent border-2 border-blue-700 rounded ripple hover:bg-blue-100 focus:outline-none">
-            Create New
-        </button>
+        <div className="p-5 w-1/3 mx-auto">
+            <Button
+                onClick={onClickHandler}
+                title="Create New"
+            />
+        </div>
     );
 }
 
@@ -32,13 +36,15 @@ export const CreateNewLink = (): JSX.Element => {
     }
     
     return (
-        <div>
-            <button onClick={createNewHandler} className="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-blue-700 uppercase transition bg-transparent border-2 border-blue-700 rounded ripple hover:bg-blue-100 focus:outline-none">
-                Create New
-            </button>
-            <button onClick={signOutHandler} className="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-red-700 uppercase transition bg-transparent border-2 border-red-700 rounded ripple hover:bg-blue-100 focus:outline-none">
-                Sign Out
-            </button>
+        <div className="p-4">
+            <Button
+                onClick={createNewHandler}
+                title="Create New"
+            />
+            <Button
+                onClick={signOutHandler}
+                title="Sign Out"
+            />
         </div>
     );
 }
