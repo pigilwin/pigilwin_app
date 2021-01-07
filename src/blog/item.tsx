@@ -1,3 +1,5 @@
+import { formatDate } from "../store/blog/blogSlice";
+
 interface LeftItemProps {
     index: number;
     title: string;
@@ -38,10 +40,4 @@ export const RightItem = ({index, title, date, onClick}: RightItemProps): JSX.El
             </div>
         </div>
     );
-}
-
-const formatDate = (date: string): string => {
-    const unix = Date.parse(date);
-    const instance = new Date(unix);
-    return instance.toLocaleDateString("en-UK");
 }

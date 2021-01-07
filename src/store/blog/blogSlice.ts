@@ -43,3 +43,9 @@ export const {
 
 export const areWeAddingANewBlogSelector = (state: RootState): boolean => state.blogReducer.addingNewBlog;
 export const blogsSelector = (state: RootState): Blog[] => state.blogReducer.blogs;
+
+export const formatDate = (date: string): string => {
+    const unix = Date.parse(date);
+    const instance = new Date(unix);
+    return instance.toLocaleDateString("en-UK");
+}

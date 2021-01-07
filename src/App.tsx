@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Blog } from './blog';
+import { ViewBlog } from './blog/ViewBlog';
 import { Home } from './home/index';
 import { Theme } from './components/theme';
 import { setTheme, themeStateSelector } from './store/theme/themeSlice';
@@ -35,6 +36,9 @@ export const App = (): JSX.Element => {
     <main className={classNames.join(" ")}>
       <BrowserRouter>
         <Switch>
+          <Route path="/blog/:id">
+            <ViewBlog/>
+          </Route>
           <Route path="/blog">
             <Blog/>
           </Route>
