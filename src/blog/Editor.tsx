@@ -2,7 +2,7 @@ import { useState } from "react";
 import ReactMde, { Classes } from "react-mde";
 import * as Showdown from "showdown";
 import "react-mde/lib/styles/css/react-mde-all.css";
-import { TextInput } from "../components/input";
+import { Button, TextInput } from "../components/input";
 
 interface EditorProps {
     title: string;
@@ -32,6 +32,18 @@ export const Editor = ({title, content}: EditorProps): JSX.Element => {
         setContentTitle(value);
     }
 
+    const onChangeContent = (v: string): void => {
+        setValue(v);
+    }
+
+    const saveClickHandler = (): void => {
+        
+    }
+
+    const deleteClickHandler = (): void => {
+        
+    }
+
     const classes: Classes = {
         preview: "bg-white"
     };
@@ -47,10 +59,20 @@ export const Editor = ({title, content}: EditorProps): JSX.Element => {
                 <ReactMde
                     classes={classes}
                     value={value}
-                    onChange={setValue}
+                    onChange={onChangeContent}
                     selectedTab={selectedTab}
                     onTabChange={setSelectedTab}
                     generateMarkdownPreview={generateMarkdownPreview}
+                />
+            </div>
+            <div className="w-full grid grid-cols-2 gap-4">
+                <Button
+                    onClick={saveClickHandler}
+                    title="Save"
+                />
+                <Button
+                    onClick={deleteClickHandler}
+                    title="Delete"
                 />
             </div>
         </div>
