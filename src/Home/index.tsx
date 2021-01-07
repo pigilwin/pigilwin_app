@@ -9,7 +9,7 @@ import {
     LinkedIn,
     Theme
 } from "../components/components";
-import { themeStateSelector } from "../store/themeSlice";
+import { themeStateSelector } from "../store/theme/themeSlice";
 import { Proficiency } from "./proficiency";
 
 export const Home = (): JSX.Element => {

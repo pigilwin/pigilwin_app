@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { themeStateSelector } from "../store/themeSlice";
+import { themeStateSelector } from "../store/theme/themeSlice";
 
 export const Photo = (): JSX.Element => {
     

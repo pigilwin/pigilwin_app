@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Blog } from './blog';
 import { Home } from './home/index';
-import { setTheme } from './store/themeSlice';
+import { setTheme } from './store/theme/themeSlice';
 
 export const App = (): JSX.Element => {
 
