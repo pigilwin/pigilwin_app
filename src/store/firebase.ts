@@ -26,8 +26,22 @@ export const authenticateOut = async (): Promise<void> => {
 
 export const createPost = async (blogWithoutId: BlogWithoutId): Promise<Blog> => {
     const docReferrence = await collection.add(blogWithoutId);
-    return blogWithIdBuilder(blogWithoutId, docReferrence.id);
-    
+    return blogWithIdBuilder(blogWithoutId, docReferrence.id);   
+}
+
+export const loadPosts = async (): Promise<Blog[]> => {
+    const blogs: Blog[] = [];
+    const snapshot = await collection.get();
+    snapshot.docs.forEach((doc) => {
+        const data = doc.data();
+        blogs.push({
+            id: doc.id,
+            content: data.content,
+            title: data.title,
+            date: data.date,
+        });
+    });
+    return blogs;
 }
 
 const blogWithIdBuilder = (blog: BlogWithoutId, id: string): Blog => {

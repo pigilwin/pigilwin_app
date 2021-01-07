@@ -41,4 +41,5 @@ export const {
     addingNewBlog
 } = authSlice.actions;
 
-export const areWeAddingANewBlogSelector = (state: RootState) => state.blogReducer.addingNewBlog;
+export const areWeAddingANewBlogSelector = (state: RootState): boolean => state.blogReducer.addingNewBlog;
+export const blogsSelector = (state: RootState): Blog[] => state.blogReducer.blogs;
