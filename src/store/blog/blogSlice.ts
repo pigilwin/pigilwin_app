@@ -3,10 +3,12 @@ import { RootState } from "../rootReducer";
 
 interface BlogState {
     blogs: string[];
+    addingNewBlog: boolean;
 }
 
 const initialState: BlogState = {
-    blogs: []
+    blogs: [],
+    addingNewBlog: false
 }
 
 const authSlice = createSlice({
@@ -17,12 +19,19 @@ const authSlice = createSlice({
             const newState = state;
             newState.blogs = action.payload;
             return newState;
+        },
+        addingNewBlog(state, action: PayloadAction<boolean>) {
+            const newState = state;
+            newState.addingNewBlog = action.payload;
+            return newState;
         }
     }
 });
 
 export const reducer = authSlice.reducer;
 export const {
-    setBlogs
+    setBlogs,
+    addingNewBlog
 } = authSlice.actions;
-export const isAuthenticated = (state: RootState) => state.authReducer.authId.length > 0;
+
+export const areWeAddingANewBlogSelector = (state: RootState) => state.blogReducer.addingNewBlog;
