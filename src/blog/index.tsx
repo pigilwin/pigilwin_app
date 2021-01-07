@@ -10,10 +10,14 @@ import { SignInPage } from './signIn';
 import { Editor } from './Editor';
 import { Blog as BlogType } from "../store/blog/blogTypes";
 import { useEffect } from "react";
+import { LeftItem, RightItem } from "./item";
+import { useHistory } from "react-router-dom";
+import { History } from 'history';
 
 export const Blog = (): JSX.Element => {
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         dispatch(loadPostsAsync());
@@ -49,7 +53,7 @@ export const Blog = (): JSX.Element => {
             <h1 className="text-2xl text-center p-4 text-black dark:text-white">Blog</h1>
             <div className="relative wrap overflow-hidden p-10 h-full">
                 <MiddleLine/>
-                {buildBlogList(blogs)}
+                {buildBlogList(blogs, history)}
             </div>
             <div className="text-center mx-auto my-4">
                 {element}
@@ -64,13 +68,30 @@ const MiddleLine = (): JSX.Element => {
     );
 }
 
-const buildBlogList = (blogs: BlogType[]): JSX.Element[] => {
+const buildBlogList = (blogs: BlogType[], history: History<unknown>): JSX.Element[] => {
     const elements: JSX.Element[] = [];
     blogs.forEach((blog: BlogType, index: number) => {
+
+        const onClickHandler = (): void => {
+            history.push('blog/' + blog.id);
+        };
+
         if (isEven(index)) {
-            console.log('even');
+            elements.push(<LeftItem
+                title={blog.title}
+                date={blog.date}
+                index={index + 1}
+                key={index}
+                onClick={onClickHandler}
+            />);
         } else {
-            console.log('odd');
+            elements.push(<RightItem
+                title={blog.title}
+                date={blog.date}
+                index={index + 1}
+                key={index}
+                onClick={onClickHandler}
+            />);
         }
     });
     return elements;
