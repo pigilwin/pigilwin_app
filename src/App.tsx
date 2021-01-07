@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Blog } from './blog';
 import { Home } from './home/index';
 import { setTheme } from './store/themeSlice';
 
@@ -16,6 +17,9 @@ export const App = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/blog">
+          <Blog/>
+        </Route>
         <Route path="/">
           <Home/>
         </Route>
