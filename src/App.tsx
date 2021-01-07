@@ -24,9 +24,7 @@ export const App = (): JSX.Element => {
     ];
 
     if (usingDarkMode) {
-        classNames.push("bg-gray-900");
-    } else {
-        classNames.push("bg-white");
+        classNames.push("dark");
     }
 
   return (
