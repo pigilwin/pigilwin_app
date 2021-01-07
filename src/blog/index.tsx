@@ -6,7 +6,7 @@ import {
 import { areWeAddingANewBlogSelector } from "../store/blog/blogSlice";
 import { SignInLink, CreateNewLink } from './links';
 import { SignInPage } from './signIn';
-import { CreateNew } from './CreateNew';
+import { Editor } from './Editor';
 
 export const Blog = (): JSX.Element => {
 
@@ -19,7 +19,7 @@ export const Blog = (): JSX.Element => {
     }
 
     if (areWeAddingANewBlog) {
-        return <CreateNew/>
+        return <Editor title="" content=""/>
     }
 
     let element: JSX.Element = <SignInLink/>;
@@ -30,7 +30,7 @@ export const Blog = (): JSX.Element => {
 
     return (
         <div className="container mx-auto h-auto">
-            <h1 className="text-2xl text-center p-4">Blog</h1>
+            <h1 className="text-2xl text-center p-4 text-black dark:text-white">Blog</h1>
             <div className="relative wrap overflow-hidden p-10 h-full">
                 <MiddleLine/>
             </div>
