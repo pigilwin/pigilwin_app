@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import {Converter} from "showdown";
 
 import { Button } from "../components/input";
 import { isAuthenticatedSelector } from "../store/auth/authSlice";
@@ -11,6 +10,7 @@ import {
     postsSelector
 } from "../store/blog/blogSlice";
 import { Blog } from "../store/blog/blogTypes";
+import { converter } from "./converter";
 import { Editor } from "./Editor";
 
 export const ViewPost = (): JSX.Element | null => {
@@ -53,15 +53,6 @@ export const ViewPost = (): JSX.Element | null => {
         />
     }
 
-    /**
-     * Load the converter and build the html
-     */
-    const converter = new Converter({
-        tables: true,
-        simplifiedAutoLink: true,
-        strikethrough: true,
-        tasklists: true
-    });
     const html = converter.makeHtml(blog.content);
 
     /**

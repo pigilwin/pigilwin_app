@@ -1,6 +1,5 @@
 import { useState } from "react";
 import ReactMde, { Classes } from "react-mde";
-import * as Showdown from "showdown";
 import "react-mde/lib/styles/css/react-mde-all.css";
 import { Button, TextInput } from "../components/input";
 import { useDispatch } from "react-redux";
@@ -8,6 +7,7 @@ import { Blog } from "../store/blog/blogTypes";
 import { createPostAsync, updatePostAsync, deletePostAsync } from '../store/blog/blogEvent';
 import { addingNewPost, editPost } from "../store/blog/blogSlice";
 import { deepCopy } from "../store/deepClone";
+import { converter } from "./converter";
 
 interface EditorProps {
     blog: Blog;
@@ -15,14 +15,6 @@ interface EditorProps {
 export const Editor = ({blog}: EditorProps): JSX.Element => {
     
     const dispatch = useDispatch();
-
-    const converter = new Showdown.Converter({
-        tables: true,
-        simplifiedAutoLink: true,
-        strikethrough: true,
-        tasklists: true
-    });
-
     const [contentTitle, setContentTitle] = useState(blog.title);
     const [value, setValue] = useState(blog.content);
     
