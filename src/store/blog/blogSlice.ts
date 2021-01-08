@@ -5,11 +5,13 @@ import { Blog } from "./blogTypes";
 interface BlogState {
     blogs: Blog[];
     addingNewBlog: boolean;
+    editingBlogId: string;
 }
 
 const initialState: BlogState = {
     blogs: [],
-    addingNewBlog: false
+    addingNewBlog: false,
+    editingBlogId: ''
 }
 
 const authSlice = createSlice({
@@ -30,6 +32,11 @@ const authSlice = createSlice({
             const newState = state;
             newState.addingNewBlog = action.payload;
             return newState;
+        },
+        editBlog(state, action: PayloadAction<string>) {
+            const newState = state;
+            newState.editingBlogId = action.payload;
+            return newState;
         }
     }
 });
@@ -38,11 +45,13 @@ export const reducer = authSlice.reducer;
 export const {
     setBlogs,
     addBlog,
+    editBlog,
     addingNewBlog
 } = authSlice.actions;
 
 export const areWeAddingANewBlogSelector = (state: RootState): boolean => state.blogReducer.addingNewBlog;
 export const blogsSelector = (state: RootState): Blog[] => state.blogReducer.blogs;
+export const currentBlogBeingEditedSelector = (state: RootState): string => state.blogReducer.editingBlogId;
 
 export const formatDate = (date: string): string => {
     const unix = Date.parse(date);

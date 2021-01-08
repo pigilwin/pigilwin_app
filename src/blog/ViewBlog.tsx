@@ -1,13 +1,20 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import Showdown from "showdown";
-import { blogsSelector, formatDate } from "../store/blog/blogSlice";
+import { Button } from "../components/input";
+import { isAuthenticatedSelector } from "../store/auth/authSlice";
+import { blogsSelector, currentBlogBeingEditedSelector, editBlog, formatDate } from "../store/blog/blogSlice";
 import { Blog } from "../store/blog/blogTypes";
+import { Editor } from "./Editor";
 
 export const ViewBlog = (): JSX.Element | null => {
 
     const { id } = useParams<{id: string}>();
+
+    const dispatch = useDispatch();
     const blogs = useSelector(blogsSelector);
+    const isCurrentlyAuthed = useSelector(isAuthenticatedSelector);
+    const currentlyEditingBlog = useSelector(currentBlogBeingEditedSelector);
     const history = useHistory();
 
     const blog = blogs.find((blog: Blog) => {
@@ -19,6 +26,12 @@ export const ViewBlog = (): JSX.Element | null => {
         return null;
     }
 
+    if (currentlyEditingBlog.length > 0 && currentlyEditingBlog === id) {
+        return <Editor
+            blog={blog}
+        />
+    }
+
     const converter = new Showdown.Converter({
         tables: true,
         simplifiedAutoLink: true,
@@ -28,13 +41,28 @@ export const ViewBlog = (): JSX.Element | null => {
 
     const html = converter.makeHtml(blog.content);
 
+    let editButton: JSX.Element | null = null;
+    if (isCurrentlyAuthed) {
+
+        const onEditClickHandler = (): void => {
+            dispatch(editBlog(blog.id));
+        };
+
+        editButton = <div className="w-1/2 mx-auto">
+            <Button
+                title="Edit"
+                onClick={onEditClickHandler}
+            />
+        </div>
+    }
+
+
     return (
         <article className="py-12 px-4 h-auto dark:text-white">
             <h1 className="text-4xl text-center mb-4 font-semibold font-heading">{blog.title}</h1>
             <p className="text-center"><span>{formatDate(blog.date)}</span></p>
-            <div className="max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: html}}>
-
-            </div>
+            <div className="max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: html}}></div>
+            {editButton}
         </article>
     );
 }
