@@ -6,7 +6,7 @@ import { Button, TextInput } from "../components/input";
 import { useDispatch } from "react-redux";
 import { Blog } from "../store/blog/blogTypes";
 import { createPostAsync, updatePostAsync, deletePostAsync } from '../store/blog/blogEvent';
-import { addingNewBlog, editBlog } from "../store/blog/blogSlice";
+import { addingNewPost, editPost } from "../store/blog/blogSlice";
 import { deepCopy } from "../store/deepClone";
 
 interface EditorProps {
@@ -69,9 +69,9 @@ export const Editor = ({blog}: EditorProps): JSX.Element => {
 
     const goBackClickHandler = (): void => {
         if (blog.id.length === 0) {
-            dispatch(addingNewBlog(false));
+            dispatch(addingNewPost(false));
         } else {
-            dispatch(editBlog(''));
+            dispatch(editPost(''));
         }
     }
 

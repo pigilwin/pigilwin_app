@@ -1,11 +1,23 @@
-import { createPost, updatePost, loadPosts, deletePost } from "../firebase";
+import { 
+    createPostFirestore, 
+    updatePostFirestore, 
+    loadPostsFirestore, 
+    deletePostFirestore 
+} from "../firebase";
 import { AppDispatch, AppThunk } from "../store";
-import { addBlog, addingNewBlog, editBlog, setBlogs, updateBlog, deleteBlog } from "./blogSlice";
+import { 
+    addPost, 
+    addingNewPost, 
+    editPost, 
+    setPosts, 
+    updatePost, 
+    deletePost 
+} from "./blogSlice";
 import { Blog, BlogWithoutId } from "./blogTypes";
 
 export const loadPostsAsync = (): AppThunk => async (dispatch: AppDispatch) => {
-    const blogs = await loadPosts();
-    dispatch(setBlogs(blogs));
+    const blogs = await loadPostsFirestore();
+    dispatch(setPosts(blogs));
 } 
 
 export const createPostAsync = (title: string, content: string): AppThunk => async (dispatch: AppDispatch) => {
@@ -14,19 +26,19 @@ export const createPostAsync = (title: string, content: string): AppThunk => asy
         content: content,
         date: (new Date()).toISOString()
     };
-    const blogWithId = await createPost(blog);
-    dispatch(addBlog(blogWithId));
-    dispatch(addingNewBlog(false));
+    const blogWithId = await createPostFirestore(blog);
+    dispatch(addPost(blogWithId));
+    dispatch(addingNewPost(false));
 };
 
 export const updatePostAsync = (blog: Blog): AppThunk => async (dispatch: AppDispatch) => {
-    await updatePost(blog);
-    dispatch(updateBlog(blog));
-    dispatch(editBlog(''));
+    await updatePostFirestore(blog);
+    dispatch(updatePost(blog));
+    dispatch(editPost(''));
 };
 
 export const deletePostAsync = (blog: Blog): AppThunk => async (dispatch: AppDispatch) => {
-    await deletePost(blog.id);
-    dispatch(deleteBlog(blog.id));
-    dispatch(editBlog(''));
+    await deletePostFirestore(blog.id);
+    dispatch(deletePost(blog.id));
+    dispatch(editPost(''));
 }

@@ -1,20 +1,26 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import Showdown from "showdown";
+
 import { Button } from "../components/input";
 import { isAuthenticatedSelector } from "../store/auth/authSlice";
-import { blogsSelector, currentBlogBeingEditedSelector, editBlog, formatDate } from "../store/blog/blogSlice";
+import {
+    currentPostBeingEditedSelector, 
+    editPost, 
+    formatDate, 
+    postsSelector
+} from "../store/blog/blogSlice";
 import { Blog } from "../store/blog/blogTypes";
 import { Editor } from "./Editor";
 
-export const ViewBlog = (): JSX.Element | null => {
+export const ViewPost = (): JSX.Element | null => {
 
     const { id } = useParams<{id: string}>();
 
     const dispatch = useDispatch();
-    const blogs = useSelector(blogsSelector);
+    const blogs = useSelector(postsSelector);
     const isCurrentlyAuthed = useSelector(isAuthenticatedSelector);
-    const currentlyEditingBlog = useSelector(currentBlogBeingEditedSelector);
+    const currentlyEditingBlog = useSelector(currentPostBeingEditedSelector);
     const history = useHistory();
 
     const blog = blogs.find((blog: Blog) => {
@@ -45,7 +51,7 @@ export const ViewBlog = (): JSX.Element | null => {
     if (isCurrentlyAuthed) {
 
         const onEditClickHandler = (): void => {
-            dispatch(editBlog(blog.id));
+            dispatch(editPost(blog.id));
         };
 
         editButton = <div className="w-1/2 mx-auto">

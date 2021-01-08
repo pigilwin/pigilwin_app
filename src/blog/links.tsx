@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Button } from "../components/input";
 import { setAuthId, setIsCurrentlyAttemptingAuth } from "../store/auth/authSlice";
-import { addingNewBlog } from "../store/blog/blogSlice";
+import { addingNewPost } from "../store/blog/blogSlice";
 import { authenticateOut } from "../store/firebase";
 
 export const SignInLink = (): JSX.Element => {
@@ -27,7 +27,7 @@ export const CreateNewLink = (): JSX.Element => {
     const dispatch = useDispatch();
 
     const createNewHandler = (): void => {
-        dispatch(addingNewBlog(true));
+        dispatch(addingNewPost(true));
     }
 
     const signOutHandler = async (): Promise<void> => {

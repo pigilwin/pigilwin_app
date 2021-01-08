@@ -24,20 +24,20 @@ export const authenticateOut = async (): Promise<void> => {
     await firebase.auth().signOut();
 }
 
-export const createPost = async (blogWithoutId: BlogWithoutId): Promise<Blog> => {
+export const createPostFirestore = async (blogWithoutId: BlogWithoutId): Promise<Blog> => {
     const docReferrence = await collection.add(blogWithoutId);
     return blogWithIdBuilder(blogWithoutId, docReferrence.id);   
 }
 
-export const updatePost = async (blog: Blog): Promise<void> => {
+export const updatePostFirestore = async (blog: Blog): Promise<void> => {
     await collection.doc(blog.id).update(blogWithoutIdBuilder(blog)); 
 }
 
-export const deletePost = async (id: string): Promise<void> => {
+export const deletePostFirestore = async (id: string): Promise<void> => {
     await collection.doc(id).delete(); 
 }
 
-export const loadPosts = async (): Promise<Blog[]> => {
+export const loadPostsFirestore = async (): Promise<Blog[]> => {
     const blogs: Blog[] = [];
     const snapshot = await collection.get();
     snapshot.docs.forEach((doc) => {

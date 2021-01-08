@@ -3,7 +3,7 @@ import {
     isAttemptingAuthSelector, 
     isAuthenticatedSelector 
 } from "../store/auth/authSlice";
-import { areWeAddingANewBlogSelector, blogsSelector } from "../store/blog/blogSlice";
+import { areWeAddingANewPostSelector, postsSelector } from "../store/blog/blogSlice";
 import { loadPostsAsync } from '../store/blog/blogEvent';
 import { SignInLink, CreateNewLink } from './links';
 import { SignInPage } from './signIn';
@@ -25,8 +25,8 @@ export const Blog = (): JSX.Element => {
 
     const isCurrentlyAttemptingAuth = useSelector(isAttemptingAuthSelector);
     const isAuthenticated = useSelector(isAuthenticatedSelector);
-    const areWeAddingANewBlog = useSelector(areWeAddingANewBlogSelector);
-    const blogs = useSelector(blogsSelector);
+    const areWeAddingANewBlog = useSelector(areWeAddingANewPostSelector);
+    const blogs = useSelector(postsSelector);
 
     if (isCurrentlyAttemptingAuth) {
         return <SignInPage/>;
