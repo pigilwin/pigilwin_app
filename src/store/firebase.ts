@@ -29,6 +29,14 @@ export const createPost = async (blogWithoutId: BlogWithoutId): Promise<Blog> =>
     return blogWithIdBuilder(blogWithoutId, docReferrence.id);   
 }
 
+export const updatePost = async (blog: Blog): Promise<void> => {
+    await collection.doc(blog.id).update(blogWithoutIdBuilder(blog)); 
+}
+
+export const deletePost = async (id: string): Promise<void> => {
+    await collection.doc(id).delete(); 
+}
+
 export const loadPosts = async (): Promise<Blog[]> => {
     const blogs: Blog[] = [];
     const snapshot = await collection.get();
@@ -50,5 +58,13 @@ const blogWithIdBuilder = (blog: BlogWithoutId, id: string): Blog => {
         content: blog.content,
         date: blog.date,
         id: id
+    };
+}
+
+const blogWithoutIdBuilder = (blog: Blog): BlogWithoutId => {
+    return {
+        title: blog.title,
+        content: blog.content,
+        date: blog.date
     };
 }

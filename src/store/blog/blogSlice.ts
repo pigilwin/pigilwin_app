@@ -37,6 +37,17 @@ const authSlice = createSlice({
             const newState = state;
             newState.editingBlogId = action.payload;
             return newState;
+        },
+        updateBlog(state, action: PayloadAction<Blog>) {
+            const newState = state;
+            newState.blogs = newState.blogs.filter(blog => blog.id !== action.payload.id);
+            newState.blogs.push(action.payload);
+            return newState;
+        },
+        deleteBlog(state, action: PayloadAction<string>) {
+            const newState = state;
+            newState.blogs = newState.blogs.filter(blog => blog.id !== action.payload);
+            return newState;
         }
     }
 });
@@ -46,6 +57,8 @@ export const {
     setBlogs,
     addBlog,
     editBlog,
+    updateBlog,
+    deleteBlog,
     addingNewBlog
 } = authSlice.actions;
 

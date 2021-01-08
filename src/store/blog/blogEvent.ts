@@ -1,7 +1,7 @@
-import { createPost, loadPosts } from "../firebase";
+import { createPost, updatePost, loadPosts, deletePost } from "../firebase";
 import { AppDispatch, AppThunk } from "../store";
-import { addBlog, addingNewBlog, setBlogs } from "./blogSlice";
-import { BlogWithoutId } from "./blogTypes";
+import { addBlog, addingNewBlog, editBlog, setBlogs, updateBlog, deleteBlog } from "./blogSlice";
+import { Blog, BlogWithoutId } from "./blogTypes";
 
 export const loadPostsAsync = (): AppThunk => async (dispatch: AppDispatch) => {
     const blogs = await loadPosts();
@@ -18,3 +18,15 @@ export const createPostAsync = (title: string, content: string): AppThunk => asy
     dispatch(addBlog(blogWithId));
     dispatch(addingNewBlog(false));
 };
+
+export const updatePostAsync = (blog: Blog): AppThunk => async (dispatch: AppDispatch) => {
+    await updatePost(blog);
+    dispatch(updateBlog(blog));
+    dispatch(editBlog(''));
+};
+
+export const deletePostAsync = (blog: Blog): AppThunk => async (dispatch: AppDispatch) => {
+    await deletePost(blog.id);
+    dispatch(deleteBlog(blog.id));
+    dispatch(editBlog(''));
+}

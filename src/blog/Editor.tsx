@@ -5,8 +5,9 @@ import "react-mde/lib/styles/css/react-mde-all.css";
 import { Button, TextInput } from "../components/input";
 import { useDispatch } from "react-redux";
 import { Blog } from "../store/blog/blogTypes";
-import { createPostAsync } from '../store/blog/blogEvent';
-import { addingNewBlog } from "../store/blog/blogSlice";
+import { createPostAsync, updatePostAsync, deletePostAsync } from '../store/blog/blogEvent';
+import { addingNewBlog, editBlog } from "../store/blog/blogSlice";
+import { deepCopy } from "../store/deepClone";
 
 interface EditorProps {
     blog: Blog;
@@ -43,21 +44,34 @@ export const Editor = ({blog}: EditorProps): JSX.Element => {
 
     const saveClickHandler = (): void => {
 
-        blog.title = contentTitle;
-        blog.content = value;
+        const savedBlog = deepCopy(blog);
 
-        if (blog.id.length === 0) {
-            dispatch(createPostAsync(blog.title, blog.content));
+        savedBlog.title = contentTitle;
+        savedBlog.content = value;
+
+        if (savedBlog.id.length === 0) {
+            dispatch(createPostAsync(savedBlog.title, savedBlog.content));
+        } else {
+            dispatch(updatePostAsync(savedBlog));
         }
     }
 
-    const deleteClickHandler = (): void => {
-        
+    let deleteButton: JSX.Element | null = null;
+    if (blog.id.length > 0) {
+        const deleteClickHandler = (): void => {
+            dispatch(deletePostAsync(blog));
+        }
+        deleteButton = <Button
+            onClick={deleteClickHandler}
+            title="Delete"
+        />;
     }
 
     const goBackClickHandler = (): void => {
         if (blog.id.length === 0) {
             dispatch(addingNewBlog(false));
+        } else {
+            dispatch(editBlog(''));
         }
     }
 
@@ -93,10 +107,7 @@ export const Editor = ({blog}: EditorProps): JSX.Element => {
                     onClick={saveClickHandler}
                     title="Save"
                 />
-                <Button
-                    onClick={deleteClickHandler}
-                    title="Delete"
-                />
+                {deleteButton}
             </div>
         </div>
     );

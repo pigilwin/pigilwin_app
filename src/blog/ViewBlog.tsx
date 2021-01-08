@@ -22,7 +22,7 @@ export const ViewBlog = (): JSX.Element | null => {
     });
 
     if (blog === undefined) {
-        history.goBack();
+        history.replace('/blog');
         return null;
     }
 
