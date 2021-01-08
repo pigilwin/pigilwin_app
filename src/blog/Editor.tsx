@@ -6,6 +6,7 @@ import { Button, TextInput } from "../components/input";
 import { useDispatch } from "react-redux";
 import { Blog } from "../store/blog/blogTypes";
 import { createPostAsync } from '../store/blog/blogEvent';
+import { addingNewBlog } from "../store/blog/blogSlice";
 
 interface EditorProps {
     blog: Blog;
@@ -54,12 +55,24 @@ export const Editor = ({blog}: EditorProps): JSX.Element => {
         
     }
 
+    const goBackClickHandler = (): void => {
+        if (blog.id.length === 0) {
+            dispatch(addingNewBlog(false));
+        }
+    }
+
     const classes: Classes = {
         preview: "bg-white"
     };
     
     return (
         <div className="max-w-4xl flex items-center h-screen flex-wrap mx-auto">
+            <div className="w-full">
+                <Button
+                    onClick={goBackClickHandler}
+                    title="Go Back"
+                />
+            </div>
             <TextInput
                 placeholder="Title"
                 onChangeHandler={onChangeTitleHandler}

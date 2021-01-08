@@ -29,7 +29,7 @@ export const ViewBlog = (): JSX.Element | null => {
     const html = converter.makeHtml(blog.content);
 
     return (
-        <article className="py-12 px-4 h-screen h-auto dark:text-white">
+        <article className="py-12 px-4 h-auto dark:text-white">
             <h1 className="text-4xl text-center mb-4 font-semibold font-heading">{blog.title}</h1>
             <p className="text-center"><span>{formatDate(blog.date)}</span></p>
             <div className="max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: html}}>
