@@ -21,7 +21,7 @@ export const Editor = ({blog}: EditorProps): JSX.Element => {
     const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
 
     const generateMarkdownPreview = (markdown: string): Promise<JSX.Element> => {
-        return Promise.resolve(markdownPreview(converter.makeHtml(markdown)));
+        return Promise.resolve(markdownPreview(converter.render(markdown)));
     };
 
     const onChangeTitleHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {

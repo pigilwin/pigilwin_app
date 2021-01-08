@@ -53,7 +53,7 @@ export const ViewPost = (): JSX.Element | null => {
         />
     }
 
-    const html = converter.makeHtml(blog.content);
+    const html = converter.render(blog.content);
 
     /**
      * If we are currently authenticated, show the edit button
