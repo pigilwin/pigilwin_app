@@ -11,7 +11,7 @@ import { Proficiency } from "./proficiency";
 
 export const Home = (): JSX.Element => {
     return (
-        <div className="max-w-4xl flex items-center h-auto flex-wrap mx-auto">
+        <div className="max-w-4xl flex items-center h-auto flex-wrap mx-auto p-2">
             <Photo/>
             <div id="profile" className="w-full rounded-lg shadow-2xl bg-white opacity-75 my-4">
                 <div className="p-4 md:p-12 text-center lg:text-left">
