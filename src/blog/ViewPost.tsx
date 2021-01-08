@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import Showdown from "showdown";
+import {Converter} from "showdown";
 
 import { Button } from "../components/input";
 import { isAuthenticatedSelector } from "../store/auth/authSlice";
@@ -15,38 +15,58 @@ import { Editor } from "./Editor";
 
 export const ViewPost = (): JSX.Element | null => {
 
+    /**
+     * Fetch the post id from the params
+     */
     const { id } = useParams<{id: string}>();
 
+    /**
+     * Load the hooks and selector
+     */
     const dispatch = useDispatch();
     const blogs = useSelector(postsSelector);
     const isCurrentlyAuthed = useSelector(isAuthenticatedSelector);
     const currentlyEditingBlog = useSelector(currentPostBeingEditedSelector);
     const history = useHistory();
 
+    /**
+     * Find the current blog by the id from the url
+     */
     const blog = blogs.find((blog: Blog) => {
         return blog.id === id;
     });
 
+    /**
+     * If the blog is not found then go back to the list of blogs
+     */
     if (blog === undefined) {
         history.replace('/blog');
         return null;
     }
 
-    if (currentlyEditingBlog.length > 0 && currentlyEditingBlog === id) {
+    /**
+     * Show the editor if the current blog is being edited
+     */
+    if (isCurrentlyAuthed && currentlyEditingBlog.length > 0 && currentlyEditingBlog === id) {
         return <Editor
             blog={blog}
         />
     }
 
-    const converter = new Showdown.Converter({
+    /**
+     * Load the converter and build the html
+     */
+    const converter = new Converter({
         tables: true,
         simplifiedAutoLink: true,
         strikethrough: true,
         tasklists: true
     });
-
     const html = converter.makeHtml(blog.content);
 
+    /**
+     * If we are currently authenticated, show the edit button
+     */
     let editButton: JSX.Element | null = null;
     if (isCurrentlyAuthed) {
 

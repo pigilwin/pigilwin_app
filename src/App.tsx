@@ -6,6 +6,8 @@ import { ViewPost } from './blog/ViewPost';
 import { Home } from './home/index';
 import { Theme } from './components/theme';
 import { setTheme, themeStateSelector } from './store/theme/themeSlice';
+import { auth } from './store/firebase';
+import { setAuthId } from './store/auth/authSlice';
 
 export const App = (): JSX.Element => {
 
@@ -14,6 +16,13 @@ export const App = (): JSX.Element => {
     if(window.matchMedia('(prefers-color-scheme: dark)').matches) {
       dispatch(setTheme(true));
     }
+
+    auth.onAuthStateChanged(async user => {
+      if (user !== null) {
+        dispatch(setAuthId(await user.getIdToken()));
+      }
+    });
+
   }, [dispatch]);
 
   const usingDarkMode = useSelector(themeStateSelector);
