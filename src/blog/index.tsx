@@ -49,7 +49,7 @@ export const Blog = (): JSX.Element => {
 
 
     return (
-        <div className="container mx-auto h-auto">
+        <div className="container min-h-screen mx-auto">
             <h1 className="text-2xl text-center p-4 text-black dark:text-white">Blog</h1>
             <div className="relative wrap overflow-hidden p-10 h-full">
                 <MiddleLine/>
