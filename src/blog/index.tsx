@@ -64,7 +64,7 @@ export const Blog = (): JSX.Element => {
 
 const MiddleLine = (): JSX.Element => {
     return (
-        <div className="border-2-2 absolute border-opacity-20 border-gray-700 h-full border left-50"></div>
+        <div className="border-2-2 absolute border-opacity-20 dark:border-white border-gray-700 h-full border left-50"></div>
     );
 }
 
