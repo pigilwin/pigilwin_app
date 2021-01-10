@@ -8,6 +8,7 @@ import {
     LinkedIn
 } from "../components/components";
 import { Proficiency } from "./proficiency";
+import { Projects } from "./projects";
 
 export const Home = (): JSX.Element => {
     return (
@@ -26,6 +27,10 @@ export const Home = (): JSX.Element => {
                     </Link>
                     <Links/>
                 </div>
+            </div>
+            <div className="w-full rounded-lg shadow-2xl bg-white opacity-75 my-4">
+                <h1 className="text-center p-4 text-2xl">Projects</h1>
+                <Projects/>
             </div>
             <div className="w-full rounded-lg shadow-2xl bg-white opacity-75 my-4">
                 <h1 className="text-center p-4 text-2xl">Technologies</h1>
