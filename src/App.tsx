@@ -32,6 +32,7 @@ export const App = (): JSX.Element => {
       "antialiased",
       "leading-normal",
       "tracking-wider",
+      "bg-gray-100",
       "dark:bg-gray-700"
   ];
 
