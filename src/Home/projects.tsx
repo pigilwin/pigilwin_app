@@ -1,9 +1,10 @@
 export const Projects = (): JSX.Element => {
     return (
         <div className="grid sm:grid-cols-1 lg:grid-cols-4 gap-4 p-4">
-            <ProjectItem title="Synopsis" link="https://synopsis.pigilwin.com/#/"/>
-            <ProjectItem title="Sounds" link="https://sounds.pigilwin.com/#/"/>
-            <ProjectItem title="Blizzard" link="https://blizzard.pigilwin.com/#/"/>
+            <ProjectItem title="Blizzard" link="https://github.com/pigilwin/blizzard"/>
+            <ProjectItem title="Better Steam Achivements" link="https://github.com/pigilwin/better_steam_achivements"/>
+            <ProjectItem title="Fireworks" link="https://github.com/pigilwin/fireworks"/>
+            <ProjectItem title="Solitaire" link="https://solitaire.pigilwin.com/#/"/>
         </div>
     );
 }

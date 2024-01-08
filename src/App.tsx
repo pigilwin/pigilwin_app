@@ -1,13 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Blog } from './blog';
-import { ViewPost } from './blog/ViewPost';
-import { Home } from './home/index';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Theme } from './components/theme';
 import { setTheme, themeStateSelector } from './store/theme/themeSlice';
-import { auth } from './store/firebase';
-import { setAuthId } from './store/auth/authSlice';
+import { Home } from './Home';
+
 
 export const App = (): JSX.Element => {
 
@@ -16,13 +13,6 @@ export const App = (): JSX.Element => {
     if(window.matchMedia('(prefers-color-scheme: dark)').matches) {
       dispatch(setTheme(true));
     }
-
-    auth.onAuthStateChanged(async user => {
-      if (user !== null) {
-        dispatch(setAuthId(await user.getIdToken()));
-      }
-    });
-
   }, [dispatch]);
 
   const usingDarkMode = useSelector(themeStateSelector);
@@ -37,26 +27,21 @@ export const App = (): JSX.Element => {
   ];
 
   if (usingDarkMode) {
-      rootElement.classList.add("dark");
+    rootElement.classList.add("dark");
   } else {
     rootElement.classList.remove("dark");
   }
 
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home/>,
+    },
+  ]);
+
   return (
     <main className={classNames.join(" ")}>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/blog/:id">
-            <ViewPost/>
-          </Route>
-          <Route path="/blog">
-            <Blog/>
-          </Route>
-          <Route path="/">
-            <Home/>
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <RouterProvider router={router}/>
       <Theme/>
     </main>
   );
